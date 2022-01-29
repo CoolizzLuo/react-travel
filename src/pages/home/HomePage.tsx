@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './HomePage.module.css';
 import { Header, Footer, Carousel, SideMenu, ProductCollection, BusinessPartners } from "../../components";
-import { Row, Col, Typography } from "antd";
+import { Row, Col, Typography } from 'antd';
 import { productList1, productList2, productList3 } from './mockups';
 import sideImage from '../../assets/images/sider_2019_12-09.png';
 import sideImage2 from '../../assets/images/sider_2019_02-04.png';
 import sideImage3 from '../../assets/images/sider_2019_02-04-2.png';
+import { withTranslation, WithTranslation } from 'react-i18next';
 
 
-const HomePage: React.FC = () => {
+const HomePageComponent: React.FC<WithTranslation> = ({ t }) => {
   return (
     <>
       <Header />
@@ -24,7 +25,7 @@ const HomePage: React.FC = () => {
         <ProductCollection
           title={
             <Typography.Title level={3} type="warning">
-              熱門推薦
+              {t("home_page.hot_recommended")}
             </Typography.Title>
           }
           sideImage={sideImage}
@@ -33,7 +34,7 @@ const HomePage: React.FC = () => {
         <ProductCollection
           title={
             <Typography.Title level={3} type="danger">
-              新品上市
+              {t("home_page.new_arrival")}
             </Typography.Title>
           }
           sideImage={sideImage2}
@@ -42,7 +43,7 @@ const HomePage: React.FC = () => {
         <ProductCollection
           title={
             <Typography.Title level={3} type="success">
-              國內旅遊推薦
+              {t("home_page.domestic_travel")}
             </Typography.Title>
           }
           sideImage={sideImage3}
@@ -55,6 +56,6 @@ const HomePage: React.FC = () => {
   )
 }
 
-export {
-  HomePage
-}
+const HomePage = withTranslation()(HomePageComponent)
+
+export { HomePage }
