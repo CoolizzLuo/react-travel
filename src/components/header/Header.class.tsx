@@ -4,9 +4,51 @@ import logo from '../../assets/logo.svg'
 import { Layout, Typography, Input, Menu, Button, Dropdown } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import store from '../../redux/store';
+import { LanguageState } from "../../redux/languageReducer";
 
 
-class HeaderComponent extends React.Component<RouteComponentProps> {
+interface State extends LanguageState {}
+
+class HeaderComponent extends React.Component<RouteComponentProps, State> {
+  constructor(props) {
+    super(props);
+    const storeState = store.getState();
+    this.state = {
+      language: storeState.language,
+      languageList: storeState.languageList,
+    };
+    store.subscribe(this.handleStoreChange);
+  };
+
+  handleStoreChange = () => {
+    const storeState = store.getState();
+    this.setState({
+      language: storeState.language,
+      languageList: storeState.languageList,
+    });
+  }
+
+  menuClickHandler = (e) => {
+    console.log(e);
+    if(e.key === 'new') {
+      const action = {
+        type: "add_language",
+        payload: {
+          code: 'new_lang',
+          name: '新語言'
+        },
+      };
+      store.dispatch(action);
+    } else {
+      const action = {
+        type: "change_language",
+        payload: e.key,
+      };
+      store.dispatch(action);
+    }
+  };
+
   render(): React.ReactNode {
     const { history } = this.props
 
@@ -19,14 +61,16 @@ class HeaderComponent extends React.Component<RouteComponentProps> {
             <Dropdown.Button
               style={{ marginLeft: 15 }}
               overlay={
-                <Menu>
-                  <Menu.Item>中文</Menu.Item>
-                  <Menu.Item>English</Menu.Item>
+                <Menu onClick={this.menuClickHandler}>
+                  { this.state.languageList.map(l => (
+                    <Menu.Item key={l.code}>{l.name}</Menu.Item>
+                  ))}
+                  <Menu.Item key={'new'}>增加新語言</Menu.Item>
                 </Menu>
               }
               icon={<GlobalOutlined />}
             >
-              語言
+              {this.state.language === 'zh' ? '中文' : 'English'}
             </Dropdown.Button>
             <Button.Group className={styles["button-group"]}>
               <Button onClick={() => history.push('/register')}>註冊</Button>
