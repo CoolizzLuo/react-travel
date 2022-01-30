@@ -12,8 +12,8 @@ import { addLanguageActionCreator, changeLanguageActionCreator } from "../../red
 const Header = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const language = useSelector((state) => state.language);
-  const languageList = useSelector((state) => state.languageList);
+  const language = useSelector((state) => state.language.language);
+  const languageList = useSelector((state) => state.language.languageList);
   const dispatch = useDispatch();
 
   const menuClickHandler = (e) => {
