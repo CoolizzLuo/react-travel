@@ -6,7 +6,7 @@ import styles from './DetailPage.module.css';
 import { Header, Footer, ProductIntro, ProductComments } from '../../components';
 import { DatePicker, Space } from 'antd';
 import { commentMockData } from './mockup';
-import { productDetailSlice } from '../../redux/productDetail/slice';
+import { productDetailSlice, getProductDetail } from '../../redux/productDetail/slice';
 import useSelector from '../../redux/hooks';
 import { useDispatch } from 'react-redux';
 
@@ -29,16 +29,8 @@ const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      dispatch(productDetailSlice.actions.fetchStart());
-      try {
-        const { data } = await axios.get(`http://123.56.149.216:8089/api/touristRoutes/${touristRouteId}`);
-        dispatch(productDetailSlice.actions.fetchSuccess(data));
-      } catch (e) {
-        dispatch(productDetailSlice.actions.fetchFail('error'));
-      }
-    })();
-  }, [touristRouteId]);
+    dispatch(getProductDetail(touristRouteId))
+  }, []);
 
   if (loading) {
     return (
