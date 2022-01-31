@@ -29,7 +29,7 @@ const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductDetail(touristRouteId))
+    dispatch(getProductDetail(touristRouteId));
   }, []);
 
   if (loading) {
