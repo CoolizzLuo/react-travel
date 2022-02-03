@@ -7,12 +7,14 @@ import { actionLog } from './middlewares/actionLog';
 import { i18nChangeLanguage } from './middlewares/i18nChangeLanguage';
 import { productDetailSlice } from './productDetail/slice';
 import { productSearchSlice } from './productSearch/slice';
+import { userSlice } from './user/slice';
 
 const rootReducer = combineReducers({
   language: languageReducer,
   recommendProducts: recommendProductsReducer,
   productDetail: productDetailSlice.reducer,
   productSearch: productSearchSlice.reducer,
+  user: userSlice.reducer,
 });
 
 // const store = createStore(rootReducer, applyMiddleware(thunk, actionLog, i18nChangeLanguage));

@@ -4,7 +4,7 @@
     "add_new_language": "添加新語言",
     "title": "React 旅遊網",
     "register": "註冊",
-    "signin": "登陸",
+    "signin": "登入",
     "home_page": "旅遊首頁",
     "weekend": "週末遊",
     "group": "跟團遊",
@@ -20,7 +20,10 @@
     "enterprise": "企業遊",
     "high_end": "高端遊",
     "outdoor": "愛玩戶外",
-    "insurance": "保險"
+    "insurance": "保險",
+    "shoppingCart": "購物車",
+    "signOut": "登出",
+    "welcome": "歡迎回來 "
   },
   "footer": {
     "detail": "版權所有 @ React 旅遊網"
