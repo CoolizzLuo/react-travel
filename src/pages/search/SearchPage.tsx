@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import styles from './SearchPage.module.css';
-import { Header, Footer, FilterArea, ProductList } from '../../components';
+import { FilterArea, ProductList } from '../../components';
+import { MainLayout } from '../../layouts/mainLayout';
 import { useParams, useLocation } from 'react-router-dom';
 import { Spin } from 'antd';
 import { searchProduct } from '../../redux/productSearch/slice';
@@ -53,20 +54,16 @@ const SearchPage: FC = () => {
   }
 
   return (
-    <>
-      <Header />
-      <div className={styles['page-content']}>
-        {/* 分類過濾器 */}
-        <div className={styles['product-list-container']}>
-          <FilterArea />
-        </div>
-        {/* 產品列表  */}
-        <div className={styles['product-list-container']}>
-          <ProductList data={productList} paging={pagination} onPageChange={onPageChange} />
-        </div>
+    <MainLayout>
+      {/* 分類過濾器 */}
+      <div className={styles['product-list-container']}>
+        <FilterArea />
       </div>
-      <Footer />
-    </>
+      {/* 產品列表  */}
+      <div className={styles['product-list-container']}>
+        <ProductList data={productList} paging={pagination} onPageChange={onPageChange} />
+      </div>
+    </MainLayout>
   );
 };
 

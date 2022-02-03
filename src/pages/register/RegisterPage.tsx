@@ -1,8 +1,12 @@
-import React from "react";
+import React from 'react';
+import { UserLayout } from '../../layouts/userLayout';
 
+const RegisterPage: React.FC = () => {
+  return (
+    <UserLayout>
+      <h1>註冊頁面</h1>
+    </UserLayout>
+  );
+};
 
-const RegisterPage : React.FC = () => {
-    return <h1>註冊頁面</h1>;
-}
-
-export { RegisterPage }
+export { RegisterPage };
