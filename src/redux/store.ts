@@ -8,6 +8,7 @@ import { i18nChangeLanguage } from './middlewares/i18nChangeLanguage';
 import { productDetailSlice } from './productDetail/slice';
 import { productSearchSlice } from './productSearch/slice';
 import { userSlice } from './user/slice';
+import { shoppingCartSlice } from './shoppingCart/slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   productDetail: productDetailSlice.reducer,
   productSearch: productSearchSlice.reducer,
   user: userSlice.reducer,
+  shoppingCart: shoppingCartSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -38,4 +40,4 @@ const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 
-export default { store, persistor };
+export { store, persistor };
