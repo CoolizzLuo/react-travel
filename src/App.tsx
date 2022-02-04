@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './App.module.css';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { HomePage, SignInPage, RegisterPage, DetailPage, SearchPage, ShoppingCartPage } from './pages';
 import useSelector from './redux/hooks';
+import { useDispatch } from 'react-redux';
+import { getShoppingCart } from './redux/shoppingCart/slice';
+
+const PrivateRoute = ({ component, isAuthenticated, ...rest }) => {
+  const routeComponent = (props) => {
+    return isAuthenticated ? React.createElement(component, props) : <Redirect to={{ pathname: '/signIn' }} />;
+  };
+  return <Route render={routeComponent} {...rest} />;
+};
 
 function App() {
   const jwt = useSelector((s) => s.user.token);
+  const dispatch = useDispatch();
 
-  const PrivateRoute = ({ component, isAuthenticated, ...rest }) => {
-    const routeComponent = (props) => {
-      return isAuthenticated ? React.createElement(component, props) : <Redirect to={{ pathname: '/signIn' }} />;
-    };
-    return <Route render={routeComponent} {...rest} />;
-  };
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getShoppingCart(jwt));
+    }
+  }, [jwt]);
 
   return (
     <div className={styles.App}>
